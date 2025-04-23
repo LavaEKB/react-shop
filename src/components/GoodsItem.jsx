@@ -3,30 +3,27 @@ import { useContext } from "react";
 import { ShopContext } from "../context";
 
 function GoodsItem(props) {
-    const {
-        id,
-        name,
-        description,
-        price,
-        //full_background,
-        image,
-
+    const { offerId,
+        displayName,
+        displayDescription,
+        price: { regularPrice },
+        displayAssets = []
     } = props;
-
+    const full_background = displayAssets.length > 0 ? displayAssets[0].full_background : null
     const { addToBasket } = useContext(ShopContext);
 
     // карточка (card) из materializecss.com
     return <div className="card">
         <div className="card-image">
-            <img src={image} alt={name} />
+            <img src={full_background} alt={displayName} />
         </div>
         <div className="card-content">
-            <span className="card-title">{name}</span>
-            <p>{description}</p>
+            <span className="card-title">{displayName}</span>
+            <p>{displayDescription}</p>
         </div>
         <div className="card-action">
-            <button onClick={() => addToBasket({ id, name, price })} className="btn">Купить</button>
-            <span className="right" style={{ fontSize: '1.8rem' }}>{price} руб.</span>
+            <button onClick={() => addToBasket({ offerId, displayName, regularPrice })} className="btn">Купить</button>
+            <span className="right" style={{ fontSize: '1.8rem' }}>{regularPrice} руб.</span>
         </div>
     </div>
 }

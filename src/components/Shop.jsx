@@ -18,7 +18,7 @@ function Shop() {
         fetch(API_URL, { headers: { 'Authorization': API_KEY } })
             .then(response => response.json())
             .then(data => {
-                setGoods(data.featured)
+                setGoods(data.shop)
             })
             .catch((err) => {
                 console.log(err);
